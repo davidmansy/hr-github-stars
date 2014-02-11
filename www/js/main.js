@@ -28,7 +28,7 @@ app.service('reposService',
       return d.promise;
     };
 
-    var getMemberStarredRepos = function(token) {
+    var getUserStarredRepos = function(token) {
       var starUrl = 'https://api.github.com/user/starred'
       var d = $q.defer();
       $http({
@@ -85,7 +85,7 @@ app.service('reposService',
 
     return {
       getRepos: getRepos,
-      getMemberStarredRepos: getMemberStarredRepos,
+      getUserStarredRepos: getUserStarredRepos,
       star: star,
       unStar: unStar 
     }
@@ -154,23 +154,23 @@ app.controller('HomeController',
       $scope.setSelectedMember = function(member) {
         $scope.selectedMember = member;
 
-        //Get the list of repos
+        //Get the list of repos of the selectedMember
         reposService.getRepos($scope.selectedMember.repos_url)
         .then(function(repos) {
           $scope.repos = repos;
-          return reposService.getMemberStarredRepos($scope.selectedMember.accessToken)
+          //Get the list of repos starred by the user
+          return reposService.getUserStarredRepos($scope.user.accessToken)
         })
-        //Get the list of repos starred by the member
-        .then(function(memberStarredRepos) {
+        .then(function(userStarredRepos) {
           //Should find another way than a double loop...
           var repos = $scope.repos;
           for (var i = 0; i < repos.length; i++) {
             var repo = repos[i];
             repo.isStarred = false;
             var result = false;
-            for (var j = 0; j < memberStarredRepos.length && result === false; j++) {
-              var memberStarredRepo = memberStarredRepos[j];
-              if(repo.id === memberStarredRepo.id) {
+            for (var j = 0; j < userStarredRepos.length && result === false; j++) {
+              var userStarredRepo = userStarredRepos[j];
+              if(repo.id === userStarredRepo.id) {
                 result = true;
                 repo.isStarred = true;
               }
@@ -183,7 +183,7 @@ app.controller('HomeController',
       //Function that will star the repo via a toggle function
       $scope.star = function(repo) {
 
-        reposService.star($scope.selectedMember.login, $scope.selectedMember.accessToken, repo)
+        reposService.star($scope.selectedMember.login, $scope.user.accessToken, repo)
         .then(function(response) {
           console.log('star success');
           repo.isStarred = true;
@@ -197,7 +197,7 @@ app.controller('HomeController',
       //Function that will unStar the repo via a toggle function
       $scope.unStar = function(repo) {
 
-        reposService.unStar($scope.selectedMember.login, $scope.selectedMember.accessToken, repo)
+        reposService.unStar($scope.selectedMember.login, $scope.user.accessToken, repo)
         .then(function(response) {
           console.log('unStar success');
           repo.isStarred = false;
