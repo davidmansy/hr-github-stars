@@ -1,0 +1,114 @@
+body {
+}
+
+.row { width: 100%;}
+.one, .row .one { width: 8.33333%; }    
+.two, .row .two { width: 16.66667%; }    
+.three, .row .three { width: 25%; }
+
+form input.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+
+form input.ng-valid.ng-dirty {
+  border-color: #78FA89;
+}
+
+ul {
+}
+ul li {
+  list-style-type: none;
+}
+ul li:hover {
+  background: #eee;
+}
+#accountlisting {
+  background: #999;
+  -moz-border-radius: 15px;
+  border-radius: 3px;
+}
+#emailListing {
+  margin-top: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+#email {
+}
+.emailListing {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  height: 120px;
+  overflow: hidden;
+  padding: 13px;
+}
+.emailListing img {
+}
+.emailListing .date {
+  font-size: 0.5em;
+  color: blue;
+  display: none;
+}
+.emailListing .subject {
+  font-size: 0.8em;
+}
+#sidebar {
+  clear: left;
+  float: left;
+  min-height: 300px;
+  width: 300px;
+  position: relative;
+  z-index: 1;
+}
+
+#sidebar ul {
+  border-bottom: 0;
+  border-left: 0;
+  border-top: 0;
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 0;
+  position: fixed;
+  width: inherit;
+}
+
+#sidebar .selected {
+  background: #bbb;
+}
+.email {
+  margin-left: 20px;
+}
+.email .header {
+  background: #eee;
+  padding: 10px;
+}
+.email .actions {
+  padding: 5px 0;
+}
+.email .body {
+  padding: 10px 0;
+  border-top: 1px solid #999;
+}
+#composeView {
+  border: 1px solid #555;
+  background: #fff;
+  padding: 0;
+  position: fixed;
+  bottom: 0px;
+  right: 30px;
+}
+#composeView #title {
+  background: #000;
+  color: #fff;
+  width: 100%;
+  padding: 10px;
+}
+
+form#composeView input, form#composeView textarea {
+  margin: 0px;
+  padding: 10px;
+  border: 0;
+}
+form#composeView textarea {
+  height: 200px;
+}

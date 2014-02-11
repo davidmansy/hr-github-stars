@@ -1,0 +1,34 @@
+<!-- Members list -->
+<div class="small-4 columns" ng-controller="MemberListController">
+  <h2>Members</h2>
+  <input type="search" placeholder="Filter members" ng-model="search.$" />
+  <ul id="emailListing">
+    <li ng-repeat="member in (members | filter:search.$)" ng-click="setSelectedMember(member)"> 
+      <div class="container emailListing" ng-class="{'selected': isSelected(member) }">
+<!--      <img class="small-4 columns" ng-src="{{gravatarImageFor(mail.from[0])}}" /> -->
+<!--      <div class="small-8 columns from">{{mail.from.join(', ')}}</div> -->
+          <div class="small-12 subject">{{ member.displayName }}</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Repos list -->
+<div class="small-8 columns" ng-controller="ReposListController">
+  <h2>Repos</h2>
+  <div ng-show="!selectedMember"><h3>No member selected</h3></div>
+  <div ng-show="selectedMember">
+    {{ selectedMember.displayName }}
+    <ul id="emailListing">
+      <li ng-repeat="repo in (repos)"> 
+        <div class="container emailListing" ng-class="{'selected': isSelected(repo) }">
+            <div class="small-12 subject">{{ repo.name }}</div>
+            <button ng-show="!repo.isStarred" ng-click="star(repo)" class="button radius">Star</button>
+            <button ng-show="repo.isStarred" ng-click="unStar(repo)" class="button radius">unStar</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+</div>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="hrgithubstarsApp">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>HR GitHub Stars</title>
+  
+  <link rel="stylesheet" href="css/foundation.min.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+    
+  <div ng-controller="HomeController">
+    <!-- NAVIGATION BAR -->
+    <nav class="top-bar">
+      <!-- Title Area -->
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">HR GitHub Stars</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+      </ul>
+      <!-- Right Nav Section -->
+      <section class="top-bar-section">
+      <ul class="right">
+        <li ng-show="loading"><img src="images/spinner_32.gif"></li>
+        <li class="has-dropdown" ng-show="loginObj.user">
+          <a href="#">Welcome {{ loginObj.user.name }}</a>
+          <ul class="dropdown">
+            <li><a href="#/logout" ng-click="loginObj.$logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      </section>
+    </nav>
+    
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+      <div ng-view></div>
+    </div>
+
+  </div>
+
+  <script src="js/vendor/angular.js"></script>
+  <script src="js/vendor/angular-route.js"></script>
+  <script src='https://cdn.firebase.com/v0/firebase.js'></script>
+  <script src='https://cdn.firebase.com/js/simple-login/1.2.5/firebase-simple-login.js'>
+  </script>
+  <script src='https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js'></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
