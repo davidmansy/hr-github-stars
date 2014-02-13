@@ -1,13 +1,14 @@
 <!-- Members list -->
 <div class="small-4 columns" ng-controller="MemberListController">
   <h2>Members</h2>
-  <input type="search" placeholder="Filter members" ng-model="search.$" />
-  <ul id="emailListing">
-    <li ng-repeat="member in (members | filter:search.$)" ng-click="setSelectedMember(member)"> 
+<!--   <input type="search" placeholder="Filter members" ng-model="search" />
+  {{ search }}
+ -->  
+ <ul id="emailListing">
+    <li ng-repeat="member in members" ng-click="setSelectedMember(member)"> 
       <div class="container emailListing" ng-class="{'selected': isSelected(member) }">
-<!--      <img class="small-4 columns" ng-src="{{gravatarImageFor(mail.from[0])}}" /> -->
-<!--      <div class="small-8 columns from">{{mail.from.join(', ')}}</div> -->
-          <div class="small-12 subject">{{ member.displayName }}</div>
+         <div class="small-8 columns">{{ member.name }} ({{ member.login }})</div>
+<!--           <h4>{{ member.displayName }}</h4> -->
       </div>
     </li>
   </ul>
@@ -18,13 +19,16 @@
   <h2>Repos</h2>
   <div ng-show="!selectedMember"><h3>No member selected</h3></div>
   <div ng-show="selectedMember">
-    {{ selectedMember.displayName }}
+    {{ selectedMember.name }}
     <ul id="emailListing">
       <li ng-repeat="repo in (repos)"> 
-        <div class="container emailListing" ng-class="{'selected': isSelected(repo) }">
-            <div class="small-12 subject">{{ repo.name }}</div>
-            <button ng-show="!repo.isStarred" ng-click="star(repo)" class="button radius">Star</button>
-            <button ng-show="repo.isStarred" ng-click="unStar(repo)" class="button radius">unStar</button>
+        <div class="container medium-8 columns" ng-class="{'selected': isSelected(repo) }">
+            <div class="small-12">
+              <img ng-show="!repo.isStarred" src="images/inactive.jpeg" ng-click="star(repo)" />
+              <img ng-show="repo.isStarred" src="images/active.jpeg" ng-click="unStar(repo)" />
+              <h4>{{ repo.name }}</h4>
+              <a ng-href="{{ repo.html_url }}"><h6>{{ repo.description }}</h6></a>
+            </div>
         </div>
       </li>
     </ul>

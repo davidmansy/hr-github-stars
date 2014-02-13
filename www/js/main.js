@@ -98,12 +98,10 @@ app.config(['$routeProvider', function($routeProvider) {
   .when('/', {
     templateUrl: "templates/home.html",
     controller: "HomeController"
-    // authRequired: true
   })
   .when('/login', {
     templateUrl: "templates/login.html",
     controller: "LoginController"
-    // authRequired: false
   })
   .otherwise({redirect_to: '/login'})
 }]);
@@ -132,8 +130,6 @@ app.controller('HomeController',
         $scope.members = $firebase(dataRef);
         $scope.members[user['id']] = user;
         $scope.members.$save(user['id']);
-        // $scope.members['David'] = user;
-        // $scope.members.$save('David');
         $scope.user = user;
       });
 
